@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aroma WebAR: The Future of Interactive Menus 🍕
 
-## Getting Started
+<div align="center">
+  <h3>Bring flavor to life in AR.</h3>
+  <p>A frictionless WebAR-based menu platform for restaurants to increase Average Order Value (AOV) and elevate customer decision-making.</p>
+</div>
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📖 Overview
+Aroma is a seamless WebAR (Augmented Reality) menu platform. By scanning a simple QR code, customers can view high-fidelity 3D models of their food directly on their physical table using **Native WebXR**—without ever downloading an app. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project aims to serve two distinct business goals:
+1. **In-Restaurant Experience:** Instantly visualizes portion sizes and ingredients to confidently upsell menu items.
+2. **At-Home Preview:** A social media mechanism to drive cravings and footfall by previewing dishes straight from a URL.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Key Features (MVP Scope)
 
-## Learn More
+### 1. WebAR Viewer
+- **Native WebXR:** Camera-based AR directly in mobile Safari/Chrome.
+- **Surface Detection:** Automatically maps the environment to place dishes accurately.
+- **Interactions:** Tap-to-place, two-finger scaling, and intuitive single-finger rotating.
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Menu UI Overlay
+- **Premium Glassmorphism:** A completely custom, non-intrusive "Aroma Noir" aesthetic that hovers over the camera feed.
+- **Real-time Synchronization:** Instantly swaps 3D models when a user browses Dish Name, Price, and Description.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. QR-Based Access System
+- **Dynamic Routing:** Unique links configured per restaurant (e.g., `aroma.app/r/{restaurant_id}`).
+- **Zero Friction:** Bypass the app store entirely. Scanning the code enters the experience in under 5 seconds.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. Admin Dashboard
+- **Digital Asset Management:** Built-in "Upload 3D Models" zone that safely pushes `.glb`/`.gltf` files directly to the cloud.
+- **Menu Assignment:** Dropdowns to easily attach uploaded 3D geometry to database entries.
+- **Analytics:** Live AR Cloud Storage tracker mapping 3D asset usage limits.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🏗️ Architecture & Technical Decisions
+To fulfill the strict **< 5 seconds load time** and **mid-range device compatibility** constraints, this MVP was engineered as a highly scalable product, not just a script:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*   **Frontend (Next.js & React):** Server-Side Rendering (SSR) ensures ultra-fast initial page loads. The aggressive Next.js Image Optimizer was explicitly bypassed for dynamic Supabase images to prevent SSRF crashes and ensure instantaneous thumbnail delivery.
+*   **AR Engine (`@google/model-viewer`):** Rather than importing massive game engines like Three.js/Babylon directly, this project leverages Google's Web Component. This drastically reduces the JavaScript bundle size, allowing the page to initialize the camera feed almost instantly.
+*   **Backend (Supabase/PostgreSQL):** A fully relational database linking `restaurants` to `dishes`. Row Level Security (RLS) is strictly enforced on the `aroma-assets` storage bucket, locking down MIME-type uploads strictly to `.glb`, `.gltf`, and images under 20MB.
+
+---
+
+## 🚀 Getting Started (Development)
+
+### Prerequisites
+- Node.js 18+
+- Supabase Account 
+
+### Quickstart
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/aroma-webar.git
+   cd aroma-webar
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Configure Environment Variables:**
+   Create a `.env.local` file in the root directory and add your Supabase keys:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL="https://your-project.supabase.co"
+   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY="your-anon-key"
+   ```
+
+4. **Initialize the Database (Supabase SQL Editor):**
+   Run the included `supabase-setup.sql` to create buckets / RLS rules, and `supabase-schema.sql` to create your initial `restaurants` and `dishes` tables.
+
+5. **Run the Development Server:**
+   ```bash
+   npm run dev
+   ```
+   *Navigate to `http://localhost:3000/admin` to begin uploading models and generating your QR codes!*
