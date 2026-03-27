@@ -241,7 +241,7 @@ export default function ARViewerScreen() {
             onClick={() => setIsInfoOpen(false)}
           >
             <div
-              className="w-full bg-surface-container-low rounded-t-4xl p-8 pb-12 animate-modal-up"
+              className="w-full bg-surface-container-low rounded-t-4xl p-8 pb-28 animate-modal-up"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="w-12 h-1.5 bg-surface-container-highest rounded-full mx-auto mb-6" />
