@@ -38,6 +38,17 @@ This project aims to serve two distinct business goals:
 
 ---
 
+## 🛠️ Tech Stack
+This project was built using the following technologies to strictly adhere to the MVP constraints (speed, WebXR focus, scalability):
+- **Frontend Framework:** Next.js & React (App Router)
+- **Language:** TypeScript
+- **WebAR Engine:** `@google/model-viewer` (Native WebXR Device API)
+- **Backend & Database:** Supabase (PostgreSQL)
+- **Cloud Storage:** Supabase Storage Buckets (with RLS policies)
+- **Styling:** Tailwind CSS & Custom CSS Glassmorphism
+
+---
+
 ## 🏗️ Architecture & Technical Decisions
 To fulfill the strict **< 5 seconds load time** and **mid-range device compatibility** constraints, this MVP was engineered as a highly scalable product, not just a script:
 
