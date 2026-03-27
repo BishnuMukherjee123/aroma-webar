@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aroma AR Admin - Menu Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#e5e2e1",
+              "surface-container-highest": "#353534",
+              "primary-fixed": "#ffdfa0",
+              "on-primary-fixed-variant": "#5c4300",
+              "surface-container-lowest": "#0e0e0e",
+              "primary": "#ffe2ab",
+              "on-primary": "#402d00",
+              "surface-bright": "#393939",
+              "tertiary-fixed-dim": "#00d9fc",
+              "on-secondary-container": "#ffddd2",
+              "on-tertiary-fixed-variant": "#004e5c",
+              "inverse-on-surface": "#313030",
+              "surface-dim": "#131313",
+              "surface": "#131313",
+              "surface-container": "#201f1f",
+              "primary-container": "#ffbf00",
+              "tertiary": "#b4efff",
+              "secondary-container": "#b73a00",
+              "secondary": "#ffb59c",
+              "surface-variant": "#353534",
+              "on-surface-variant": "#d4c5ab",
+              "on-error-container": "#ffdad6",
+              "on-tertiary-fixed": "#001f26",
+              "primary-fixed-dim": "#fbbc00",
+              "on-tertiary": "#003640",
+              "on-secondary-fixed": "#390c00",
+              "inverse-primary": "#795900",
+              "tertiary-container": "#04dcff",
+              "secondary-fixed": "#ffdbcf",
+              "on-secondary-fixed-variant": "#822700",
+              "on-secondary": "#5c1900",
+              "error-container": "#93000a",
+              "tertiary-fixed": "#aaedff",
+              "on-tertiary-container": "#005d6d",
+              "surface-container-low": "#1c1b1b",
+              "background": "#131313",
+              "on-primary-fixed": "#261a00",
+              "surface-tint": "#fbbc00",
+              "inverse-surface": "#e5e2e1",
+              "error": "#ffb4ab",
+              "outline": "#9c8f78",
+              "on-background": "#e5e2e1",
+              "on-primary-container": "#6d5000",
+              "on-error": "#690005",
+              "surface-container-high": "#2a2a2a",
+              "outline-variant": "#504532",
+              "secondary-fixed-dim": "#ffb59c"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<div class="flex h-screen overflow-hidden">
+<!-- NavigationDrawer Implementation -->
+<aside class="hidden md:flex flex-col h-full w-64 border-r border-[#504532]/20 bg-[#1C1B1B] py-8">
+<div class="px-6 mb-10">
+<div class="text-[#FFBF00] font-bold text-lg tracking-widest uppercase font-headline">Aroma AR</div>
+</div>
+<div class="px-4 mb-8">
+<div class="flex items-center gap-3 p-3 rounded-lg bg-surface-container-high">
+<img alt="Restaurant Admin" class="w-10 h-10 rounded-full object-cover" data-alt="Close up of a professional chef in a clean white uniform plating a gourmet dish in a high-end kitchen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxNYJwl-tj9lQdMcjcKb8YG5fVSCg9qZ0LAKjlYeswhrA9a9Eh6A6gM-g7d9E5klzqVviG7zwyniRh1mdjumFMA6h6Ek2RVdxQLSHdi3wOTubCoglZ8sy3XJwux0agHAc_IE92nfu9Lfe_z8fELf6LawxhkrLY0kzLOtHVC0bpbegODPARhqiyxCKVXvonxkpySzGe9F2gGP6f4sOe3fZXy2Hnq2PyFt8lGiwXob5fzfRWuArd30RhhULJ95uCnYX0g-FxYgrnwiA"/>
+<div>
+<div class="font-headline font-semibold text-sm text-on-surface">Aroma Gourmet</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-wider">Premier Digital Menu</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 px-2">
+<a class="flex items-center gap-3 px-4 py-3 text-[#FFE2AB]/70 hover:bg-[#2A2A2A] rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-[#FFBF00]/10 text-[#FFBF00] border-r-4 border-[#FFBF00] rounded-l-lg transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined text-xl">trolley</span>
+<span class="font-medium text-sm">Menu Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#FFE2AB]/70 hover:bg-[#2A2A2A] rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl">3d_rotation</span>
+<span class="font-medium text-sm">AR Assets</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#FFE2AB]/70 hover:bg-[#2A2A2A] rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl">receipt_long</span>
+<span class="font-medium text-sm">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#FFE2AB]/70 hover:bg-[#2A2A2A] rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="font-medium text-sm">Settings</span>
+</a>
+</nav>
+<div class="px-6 mt-auto">
+<div class="p-4 rounded-xl bg-gradient-to-br from-primary-container/20 to-transparent border border-outline-variant/20">
+<p class="text-[10px] text-primary mb-2 font-bold uppercase tracking-widest">Storage Status</p>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mb-2">
+<div class="bg-primary-container h-1 rounded-full w-[65%]"></div>
+</div>
+<p class="text-[10px] text-on-surface-variant">6.5GB of 10GB AR Cloud used</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto bg-surface relative">
+<!-- TopAppBar Contextual Header -->
+<header class="sticky top-0 z-40 bg-surface/60 backdrop-blur-xl px-8 h-20 flex items-center justify-between">
+<div>
+<h1 class="font-headline font-bold text-2xl text-on-surface tracking-tight">Menu Management</h1>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest mt-0.5">Inventory &amp; Digital Assets</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-4 py-2 rounded-md transition-all text-sm font-medium border border-outline-variant/10">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                        Filter
+                    </button>
+<button class="flex items-center gap-2 bg-primary-container hover:bg-primary-fixed-dim text-on-primary-container px-5 py-2.5 rounded-md transition-all scale-100 active:scale-95 text-sm font-bold shadow-lg shadow-primary-container/10">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">add</span>
+                        Add New Dish
+                    </button>
+</div>
+</header>
+<!-- Table Section -->
+<div class="p-8">
+<!-- Data Visualization Stats (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+<div class="bg-surface-container-low p-6 rounded-lg border border-outline-variant/5">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest block mb-2">Total Dishes</span>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-headline font-bold text-primary">42</span>
+<span class="text-xs text-tertiary-fixed-dim mb-1">+4 this month</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-lg border border-outline-variant/5">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest block mb-2">Live in AR</span>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-headline font-bold text-on-surface">38</span>
+<span class="text-xs text-on-surface-variant mb-1">90% Coverage</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-lg border border-outline-variant/5">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest block mb-2">3D Asset Health</span>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-headline font-bold text-on-surface">Optimal</span>
+<span class="text-xs text-primary mb-1">Low Latency</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-lg border border-outline-variant/5">
+<span class="text-[10px] font-bold text-on-surface-variant uppercase tracking-widest block mb-2">Avg. Interaction</span>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-headline font-bold text-on-surface">2.4m</span>
+<span class="text-xs text-secondary mb-1">Per User</span>
+</div>
+</div>
+</div>
+<!-- Main Menu Table Card -->
+<div class="bg-surface-container-low rounded-lg overflow-hidden border border-outline-variant/5 shadow-2xl">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high/50 border-b border-outline-variant/10">
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.1em]">Dish Detail</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.1em]">Category</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.1em]">Price</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.1em]">Status</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.1em]">3D Model (.glb)</th>
+<th class="px-6 py-4 text-[10px] font-bold text-on-surface-variant uppercase tracking-[0.1em] text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-md bg-surface-container overflow-hidden">
+<img alt="Signature Salmon" class="w-full h-full object-cover" data-alt="Gourmet grilled salmon fillet with asparagus and lemon on a minimalist dark plate, dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMQiL3sbfrcdP8ziOjZ3POtzFcK-xqmayAjEGwLFRhBXqbEMAsB0mzYjqPjZXT2FxzMDpocrPG0jMaR41__9et1WOJ1ABfEIPxXVkjuqEu68sRv6JpDBqJsyHfkCTI7BMGZb6mFl6ODGHu4B5a_dnnJokHH58bQEaHfE9mJaaVWM7IWhtFwC5Mxuro2SEHTKnDglSLLUJFrkdYJ5aup_6Yf_PIwTuKTfEzUgXWAuaQKA0iv9XnUwQ3NIRK4hfArerWVDDNfEIrNoI"/>
+</div>
+<div>
+<p class="font-semibold text-on-surface text-sm">Signature Miso Salmon</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">SKU: SAL-001</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant">Entrées</td>
+<td class="px-6 py-5 text-sm font-medium text-primary">$34.00</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary-container/10 text-primary uppercase tracking-wider">
+                                        Live
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2 group">
+<span class="material-symbols-outlined text-primary text-lg">view_in_ar</span>
+<span class="text-xs font-mono text-on-surface-variant group-hover:text-primary transition-colors cursor-pointer">miso_salmon_high.glb</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-3">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-xl">upload_file</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-md bg-surface-container overflow-hidden">
+<img alt="Truffle Pasta" class="w-full h-full object-cover" data-alt="Exquisite truffle pasta with shaved black truffles in a gold-rimmed white bowl, studio lighting, dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOIpY692blzsSmIbZnJEvgQloWEkC7RIPscFYIdbRZAvQTAWluSYvJ9kHIXGODVzcCG3YljOdUpmtXCgBc95lMtP792hjg80L1IJq4obIlAnizNzhtf8DK2bcrUd1TPmWHTS1kUTZzMbE7dxpajIEputjpOdwam6zG1iiCiVzigvVBd-YfmvfSjiNfIL-V1rMBClm1oUCG9CoGGSkTjRbH-5NX7DIzKDH9Ty_ebSB5fBFwvYL3QibFvQrsI0MHI4xhTfGvI9LaGyM"/>
+</div>
+<div>
+<p class="font-semibold text-on-surface text-sm">Black Truffle Tagliatelle</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">SKU: PAS-042</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant">Pasta</td>
+<td class="px-6 py-5 text-sm font-medium text-primary">$48.00</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-surface-container-highest text-on-surface-variant uppercase tracking-wider">
+                                        Draft
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<button class="flex items-center gap-2 text-[10px] font-bold text-secondary uppercase tracking-widest hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                                        Upload 3D Model
+                                    </button>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-3">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-xl">upload_file</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-md bg-surface-container overflow-hidden">
+<img alt="Lava Cake" class="w-full h-full object-cover" data-alt="Warm molten chocolate lava cake with a dusting of powdered sugar and a single raspberry on a sleek black slate board" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZtlysnQit-hwlrAO73bU4dMpn5PQ1S70Vo7ZkcMCuBuR22rWX18q73yWfy6401rSPd9gXXHNJaGeLdnfUcZQK4kkXpPp-mzws9ogXtXsQc3V1Q4GpJ59tfVWq9EaJ1ho0aAokV0PdFUZLs_kwXgWE_cDm2SJAWk3JUenD3pY341o_r8OfXR8OjCzr0VPUtZNMdVz49w8FeYa6JI2J1IEYdE1D3s2L0s3kyXxwYj9aqAKE6-g1ENBfqqeoDPzK3xIyfmHuxcwXXtA"/>
+</div>
+<div>
+<p class="font-semibold text-on-surface text-sm">Molten Lava Sphere</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">SKU: DES-009</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant">Desserts</td>
+<td class="px-6 py-5 text-sm font-medium text-primary">$18.00</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary-container/10 text-primary uppercase tracking-wider">
+                                        Live
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2 group">
+<span class="material-symbols-outlined text-primary text-lg">view_in_ar</span>
+<span class="text-xs font-mono text-on-surface-variant group-hover:text-primary transition-colors cursor-pointer">lava_sphere_final.glb</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-3">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-xl">upload_file</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-md bg-surface-container overflow-hidden">
+<img alt="Wagyu Burger" class="w-full h-full object-cover" data-alt="Gourmet Wagyu beef burger with caramelized onions and artisan cheese on a brioche bun, side of truffle fries" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLoV9CuudB0Wxvncg-U-r66Mf0MqIEr8e52iaAWU0vtOjK4FpWajs2d3pQYO25IVJBAXAACBW3hg7PniK-4ESlYsA7__iKQ5ZbVxhHdST6pzCI6wT5VPbtRG2_6PcDDHb1q7985ji3i_2HVs0Pq3r1FTsKG253wS2diKSpaihIAjZIH1aeyMjqza7dG--NQlW5NkQGrWYP9ic1Vt9pG-fDXVmZ-zZYKnnTCRGupAmsYJlQDPZLivtDuRwN5gJYhEEcAgyiRCAXMK4"/>
+</div>
+<div>
+<p class="font-semibold text-on-surface text-sm">Imperial Wagyu Burger</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">SKU: BUR-102</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant">Casual Dining</td>
+<td class="px-6 py-5 text-sm font-medium text-primary">$29.00</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary-container/10 text-primary uppercase tracking-wider">
+                                        Live
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2 group">
+<span class="material-symbols-outlined text-primary text-lg">view_in_ar</span>
+<span class="text-xs font-mono text-on-surface-variant group-hover:text-primary transition-colors cursor-pointer">wagyu_burger_v2.glb</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-3">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-xl">upload_file</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-xl">edit</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination Shell -->
+<div class="px-6 py-4 flex items-center justify-between bg-surface-container-high/20 border-t border-outline-variant/10">
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-medium">Showing 1 to 10 of 42 dishes</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-md border border-outline-variant/20 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md bg-primary-container text-on-primary-container font-bold text-xs">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md border border-outline-variant/20 text-on-surface-variant hover:text-primary transition-colors text-xs">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md border border-outline-variant/20 text-on-surface-variant hover:text-primary transition-colors text-xs">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-md border border-outline-variant/20 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Contextual FAB Suppression: Admin dash does not use the Consumer FAB -->
+</main>
+</div>
+</body></html>

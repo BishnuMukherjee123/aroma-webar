@@ -1,26 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 @import "tailwindcss";
 
+@theme {
+  --color-surface: #131313;
+  --color-surface-bright: #393939;
+  --color-surface-dim: #131313;
+  --color-surface-container-lowest: #0E0E0E;
+  --color-surface-container-low: #1C1B1B;
+  --color-surface-container: #201F1F;
+  --color-surface-container-high: #2A2A2A;
+  --color-surface-container-highest: #353534;
+  --color-surface-variant: #353534;
+  
+  --color-primary: #FFE2AB;
+  --color-primary-container: #FFBF00;
+  --color-primary-fixed: #FFDFA0;
+  --color-primary-fixed-dim: #FBBC00;
+  
+  --color-secondary: #FFB59C;
+  --color-secondary-container: #B73A00;
+  --color-secondary-fixed: #FFDBCF;
+  --color-secondary-fixed-dim: #FFB59C;
+  
+  --color-tertiary: #B4EFFF;
+  --color-tertiary-container: #04DCFF;
+  --color-tertiary-fixed: #AAEDFF;
+  --color-tertiary-fixed-dim: #00D9FC;
+  
+  --color-on-surface: #E5E2E1;
+  --color-on-surface-variant: #D4C5AB;
+  --color-on-primary: #402D00;
+  --color-on-primary-container: #6D5000;
+  --color-on-secondary: #5C1900;
+  --color-on-secondary-container: #FFDDD2;
+  --color-on-tertiary: #003640;
+  --color-on-tertiary-container: #005D6D;
+  
+  --color-outline: #9C8F78;
+  --color-outline-variant: #504532;
+  --color-error: #FFB4AB;
+  --color-error-container: #93000A;
+
+  --radius-card: 2.0rem;
+  --radius-md: 1.5rem;
+  --radius-full: 9999px;
+
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-plus-jakarta-sans);
+  
+  --tracking-editorial: -0.02em;
+  --tracking-label: 0.05em;
+  --tracking-logo: 0.2em;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Texture overlay */
+.bg-texture::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 50;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+}
+
+.spinner-arc {
+  border: 3px solid transparent;
+  border-top-color: var(--color-primary-container);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin-arc 1s linear infinite;
+}
+
+@keyframes spin-arc {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+/* =============================================
+   PREMIUM ANIMATION LIBRARY
+   ============================================= */
+
+/* --- Page / Screen Entry --- */
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(40px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-page-enter {
+  animation: page-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* --- Modal Slide Up (from bottom) --- */
+@keyframes modal-slide-up {
+  from { opacity: 0; transform: translateY(100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes modal-slide-down {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(100%); }
+}
+.animate-modal-up   { animation: modal-slide-up   0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+.animate-modal-down { animation: modal-slide-down 0.3s  cubic-bezier(0.4, 0, 0.6, 1)   forwards; }
+
+/* --- Overlay Backdrop Fade --- */
+@keyframes fade-in-backdrop {
+  from { opacity: 0; backdrop-filter: blur(0px); }
+  to   { opacity: 1; backdrop-filter: blur(8px);  }
+}
+.animate-backdrop { animation: fade-in-backdrop 0.3s ease forwards; }
+
+@keyframes fade-out-backdrop {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+.animate-backdrop-out { animation: fade-out-backdrop 0.35s ease forwards; }
+
+/* --- Card Spring Pop (for dish card, info modal) --- */
+@keyframes spring-pop {
+  0%   { opacity: 0; transform: translateY(48px) scale(0.85); }
+  55%  { transform: translateY(-8px) scale(1.04); }
+  75%  { transform: translateY(4px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-spring-pop { animation: spring-pop 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+/* --- Stagger children list items --- */
+@keyframes stagger-item {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.stagger-item { animation: stagger-item 0.35s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.stagger-item:nth-child(1)  { animation-delay: 0ms; }
+.stagger-item:nth-child(2)  { animation-delay: 40ms; }
+.stagger-item:nth-child(3)  { animation-delay: 80ms; }
+.stagger-item:nth-child(4)  { animation-delay: 120ms; }
+.stagger-item:nth-child(5)  { animation-delay: 160ms; }
+.stagger-item:nth-child(6)  { animation-delay: 200ms; }
+
+/* --- Tab content fade-scale (instant feel) --- */
+@keyframes tab-enter {
+  from { opacity: 0; transform: scale(0.96) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.animate-tab-enter { animation: tab-enter 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* --- AR Scan Line (sweeping scan effect) --- */
+@keyframes ar-scan {
+  0%   { top: 0%; opacity: 0.8; }
+  50%  { opacity: 0.4; }
+  100% { top: 100%; opacity: 0; }
+}
+.ar-scan-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,253,255,0.6), transparent);
+  box-shadow: 0 0 12px rgba(0,253,255,0.5);
+  animation: ar-scan 2.5s linear infinite;
+}
+
+/* --- AR Pulse Glow ring --- */
+@keyframes ar-pulse-ring {
+  0%   { transform: scale(0.9); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+.ar-pulse-ring {
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(0, 253, 255, 0.5);
+  border-radius: 50%;
+  animation: ar-pulse-ring 1.5s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+}
+
+/* --- Button press haptic bounce --- */
+@keyframes haptic-bounce {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(0.93); }
+  70%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+.animate-haptic:active { animation: haptic-bounce 0.25s ease forwards; }
+
+/* --- Shimmer loading skeleton --- */
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, var(--color-surface-container) 25%, var(--color-surface-container-high) 50%, var(--color-surface-container) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease infinite;
+}
+
+/* --- Float (for the 3D model viewer) --- */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+.animate-float { animation: float 4s ease-in-out infinite; }
+
+/* --- Slide in from right (admin sidebar nav items) --- */
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(-16px); }  
+  to   { opacity: 1; transform: translateX(0); }
+}
+.animate-slide-right { animation: slide-in-right 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* --- Badge pop (cart count update) --- */
+@keyframes badge-pop {
+  0%   { transform: scale(0); }
+  60%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+.animate-badge { animation: badge-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar { width: 3px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: var(--color-outline-variant); border-radius: 4px; }
