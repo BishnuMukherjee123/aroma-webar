@@ -41,37 +41,6 @@ export default function AdminDashboardScreen() {
     }, 350);
   };
 
-  // ─── Standalone 3D Model Uploader ───
-  const [uploadedModels, setUploadedModels] = useState<{ name: string; url: string; size: string }[]>([]);
-  const [globalModelUploading, setGlobalModelUploading] = useState(false);
-
-  const uploadGlobalModel = async (file: File) => {
-    setGlobalModelUploading(true);
-    try {
-      const path = `models/${Date.now()}_${file.name}`;
-      const { error } = await supabase.storage.from('aroma-assets').upload(path, file);
-      if (error) throw error;
-      const { data: { publicUrl } } = supabase.storage.from('aroma-assets').getPublicUrl(path);
-      setUploadedModels(prev => [
-        { name: file.name, url: publicUrl, size: `${(file.size / 1024 / 1024).toFixed(1)} MB` },
-        ...prev,
-      ]);
-    } catch (err) {
-      console.error('Upload failed:', err);
-      alert('Upload failed. Check Supabase storage bucket permissions.');
-    } finally {
-      setGlobalModelUploading(false);
-    }
-  };
-
-  const assignModelToDish = async (modelUrl: string, dishId: string) => {
-    if (!dishId) return;
-    const { error } = await supabase.from('dishes').update({ model_url: modelUrl }).eq('id', dishId);
-    if (error) { alert('Failed to assign model.'); return; }
-    fetchDishes();
-    alert('Model assigned successfully!');
-  };
-
   useEffect(() => {
     fetchDishes();
     generateQR();
@@ -215,8 +184,8 @@ export default function AdminDashboardScreen() {
       </header>
 
         <div className="p-10 space-y-10 pb-32">
-          {/* 3-column equal grid: Upload 3D | QR Code | AR Storage */}
-          <div className="grid grid-cols-3 gap-6">
+          {/* 2-column equal grid: AR Storage | QR Code */}
+          <div className="grid grid-cols-2 gap-6">
 
             {/* AR Cloud Storage */}
             <div className="bg-surface-container-low rounded-xl p-6 flex flex-col justify-between border border-outline-variant/10">
@@ -237,49 +206,6 @@ export default function AdminDashboardScreen() {
                 <div className="flex justify-between">
                   <span className="text-[10px] text-on-surface-variant">{((STORAGE.used / STORAGE.total) * 100).toFixed(0)}% used</span>
                   <span className="text-[10px] text-on-surface-variant">{(STORAGE.total - STORAGE.used).toFixed(1)} {STORAGE.unit} remaining</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Upload 3D Models */}
-            <div className="bg-surface-container-low rounded-xl p-6 border border-outline-variant/10 flex flex-col">
-              <div className="flex items-center justify-between mb-5">
-                <div className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-primary-container">cloud_upload</span>
-                  <h2 className="font-heading font-bold text-on-surface text-sm">Upload 3D Models</h2>
-                </div>
-                <span className="text-[9px] text-on-surface-variant font-mono uppercase tracking-widest">.glb / .gltf</span>
-              </div>
-              <div className="relative group border-2 border-dashed border-outline-variant/30 rounded-xl p-6 flex flex-col items-center justify-center text-center hover:border-primary-container/60 transition-all cursor-pointer bg-surface-container-high/20 hover:bg-primary-container/5">
-                <input type="file" accept=".glb,.gltf" className="absolute inset-0 opacity-0 cursor-pointer z-10 w-full h-full" onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadGlobalModel(f); e.target.value = ''; }} disabled={globalModelUploading} />
-                <div className="w-12 h-12 rounded-full bg-primary-container/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  {globalModelUploading ? <span className="material-symbols-outlined text-primary-container animate-spin">refresh</span> : <span className="material-symbols-outlined text-primary-container">upload</span>}
-                </div>
-                <p className="text-xs font-bold text-on-surface mb-1">{globalModelUploading ? "Uploading..." : "Click to upload or drag & drop"}</p>
-                <p className="text-[10px] text-on-surface-variant">Under 10MB recommended for fast AR</p>
-              </div>
-              <div className="mt-5 flex-1">
-                <h3 className="text-[9px] font-bold text-on-surface-variant uppercase tracking-widest mb-3">Recent Uploads</h3>
-                <div className="space-y-2 max-h-36 overflow-y-auto custom-scrollbar">
-                  {uploadedModels.length === 0 ? (
-                    <p className="text-[10px] text-on-surface-variant/50 text-center py-4">No uploads yet in this session</p>
-                  ) : (
-                    uploadedModels.map((model, idx) => (
-                      <div key={idx} className="stagger-item bg-surface-container-high/40 rounded-lg border border-outline-variant/5 p-3 space-y-2">
-                        <div className="flex items-center gap-2">
-                          <span className="material-symbols-outlined text-primary-container text-base" style={{ fontVariationSettings: "'FILL' 1" }}>3d_rotation</span>
-                          <div className="min-w-0">
-                            <p className="font-mono text-on-surface text-[10px] truncate">{model.name}</p>
-                            <p className="text-[9px] text-on-surface-variant">{model.size}</p>
-                          </div>
-                        </div>
-                        <select className="w-full text-[10px] bg-surface-container-high rounded-md px-2 py-1.5 text-on-surface border border-outline-variant/10 outline-none appearance-none" defaultValue="" onChange={(e) => { if (e.target.value) assignModelToDish(model.url, e.target.value); }}>
-                          <option value="" disabled>Assign to dish...</option>
-                          {dishes.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
-                        </select>
-                      </div>
-                    ))
-                  )}
                 </div>
               </div>
             </div>
