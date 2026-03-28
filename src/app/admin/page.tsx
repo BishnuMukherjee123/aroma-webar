@@ -458,6 +458,21 @@ export default function AdminDashboardScreen() {
                 </div>
               </div>
 
+              {/* 3D Model Upload */}
+              <div className="pt-6 border-t border-outline-variant/10 space-y-3">
+                <label className="text-[10px] font-extrabold text-on-surface-variant uppercase tracking-widest ml-1 block">3D Model File</label>
+                <div className="relative group overflow-hidden rounded-2xl border border-dashed border-outline-variant/30 hover:border-primary-container/50 transition-all p-6 flex items-center gap-4 cursor-pointer bg-surface-container-high/30 hover:bg-surface-container-high/60">
+                  <input disabled={loading} type="file" accept=".glb,.gltf" onChange={(e) => setModelFile(e.target.files?.[0] || null)} className="absolute inset-0 opacity-0 cursor-pointer z-10" />
+                  <span className="material-symbols-outlined text-3xl text-on-surface-variant/40 group-hover:text-primary-container transition-all shrink-0">view_in_ar</span>
+                  <div>
+                    <p className="text-sm font-bold text-on-surface group-hover:text-on-surface transition-all">
+                      {modelFile ? modelFile.name : editingDish?.model_url ? "✅ Model assigned — upload new to replace" : "Click to upload 3D model"}
+                    </p>
+                    <p className="text-[10px] text-on-surface-variant mt-0.5">.GLB or .GLTF · Under 20MB for best AR performance</p>
+                  </div>
+                </div>
+              </div>
+
               {uploadProgress > 0 && uploadProgress < 100 && (
                 <div className="space-y-3">
                   <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest">
